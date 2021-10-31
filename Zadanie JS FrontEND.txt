@@ -1,0 +1,8 @@
+Napisz serwis który bêdzie wyœwietla³ publiczne dane na podstawie API github (https://developer.github.com/v3).
+Wygl¹d serwisu dowolny, preferowane 3 kolumny z danymi o organizacji, userach i repozytoriach. Ka¿da encja powinna u¿ywaæ elementu card https://vuetifyjs.com/en/components/cards/
+Niezbêdne dane organizacji: Nazwa, iloœæ uczestników(followers), iloœæ repozytoriów, data utworzenia (DD-MM-YYYY).
+Niezbêdne dane usera: Avatar, Imie <login> Nazwisko, Zarejestrowany "x" dni temu.
+Niezbêdne dane repozytorium: Nazwa repozytorium, iloœæ otwartych Pull Requestów(PR), iloœæ gwiazdek, liczba otwartych / liczba zamkniêtych issues, stosunek PR do wszystkich issue (ile wypada PR na 1 issue), ostatni commit "x" dni temu. 
+Sortowanie organizacji i userów dowolne (takie jakie zwróci API). Sortowanie Repozytoriów - od najwiêkszej do najmniejszej iloœci PR.
+Wymagany framework - VueJS 2 + Vuetify (https://vuetifyjs.com/en/getting-started/quick-start).
+Oceniane jest poprawne u¿ycie frameworka VueJS 2 (m.in. slotów), wygl¹d oraz wsparcie standardów (m.in. CSS - BEM, HTML5 - responsywnoœæ).
