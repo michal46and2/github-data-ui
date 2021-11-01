@@ -3,8 +3,21 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
+import moment from "moment";
+import { UserDetails } from "./interfaces/user";
 
 Vue.config.productionTip = false;
+
+Vue.filter("formatDate", function (value: string) {
+  if (value) {
+    return moment(value).format("DD-MM-YYYY");
+  }
+});
+Vue.filter("nameWithLogin", function (user: UserDetails) {
+  if (user) {
+    return user.name.split(" ").join(` :${user.login}: `);
+  }
+});
 
 new Vue({
   store,
