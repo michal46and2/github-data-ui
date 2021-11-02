@@ -30,7 +30,10 @@
         <Card>
           <v-card-title>Repositories</v-card-title>
         </Card>
-        <Card v-for="repo in $store.getters.getRepos" v-bind:key="repo.id">
+        <Card
+          v-for="repo in $store.getters.getReposSorted"
+          v-bind:key="repo.id"
+        >
           <v-card-text>
             <div class="text--primary">{{ repo.name }}</div>
             <div>Open PRs: {{ repo.prs_count }}</div>
