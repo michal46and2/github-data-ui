@@ -4,53 +4,43 @@
       <v-col cols="12">
         <v-row>
           <v-col cols="4">
-            <v-card
-              elevation="1"
-              outlined
-              v-for="org in $store.state.orgs"
-              v-bind:key="org.id"
-            >
+            <Card>
+              <v-card-title>Organizations</v-card-title>
+            </Card>
+            <Card v-for="org in $store.state.orgs" v-bind:key="org.id">
               <v-card-text>
-                <div class="text--primary">{{ org.name }}</div>
-                <div>{{ org.followers }}</div>
-                <div>{{ org.public_repos }}</div>
-                <div>{{ org.created_at | formatDate }}</div>
+                <div class="text--primary">{{ org.name || org.login }}</div>
+                <div>Followers: {{ org.followers }}</div>
+                <div>Repos: {{ org.public_repos }}</div>
+                <div>Created: {{ org.created_at | formatDate }}</div>
               </v-card-text>
-            </v-card>
+            </Card>
           </v-col>
           <v-col cols="4">
-            <v-card
-              elevation="1"
-              outlined
-              v-for="user in $store.state.users"
-              v-bind:key="user.id"
-            >
-              <v-img height="250" :src="user.avatar_url"></v-img>
-              <v-card-title>
-                {{ user | nameWithLogin }}
-              </v-card-title>
+            <Card>
+              <v-card-title>Users</v-card-title>
+            </Card>
+            <Card v-for="user in $store.state.users" v-bind:key="user.id">
+              <v-img :src="user.avatar_url"></v-img>
               <v-card-text>
-                {{ user.created_at | formatDate }}
+                <div class="text--primary">{{ user | nameWithLogin }}</div>
+                <div>{{ user.created_at | registeredDaysAgo }}</div>
               </v-card-text>
-            </v-card>
+            </Card>
           </v-col>
           <v-col cols="4">
-            <v-card
-              elevation="1"
-              outlined
-              v-for="repo in $store.state.repos"
-              v-bind:key="repo.id"
-            >
-              <v-card-title>
-                {{ repo.name }}
-              </v-card-title>
+            <Card>
+              <v-card-title> Repositories </v-card-title>
+            </Card>
+            <Card v-for="repo in $store.state.repos" v-bind:key="repo.id">
               <v-card-text>
-                <div>{{ repo.prs_count }}</div>
-                <div>{{ repo.stargazers_count }}</div>
-                <div>{{ repo.open_issues_count }}</div>
-                <div>{{ repo.prs_count / repo.open_issues_count }}</div>
+                <div class="text--primary">{{ repo.name }}</div>
+                <div>Open PRs: {{ repo.prs_count }}</div>
+                <div>Stars: {{ repo.stargazers_count }}</div>
+                <div>Open issues: {{ repo.open_issues_count }}</div>
+                <div>{{ repo | prsToIssuesRatio }}</div>
               </v-card-text>
-            </v-card>
+            </Card>
           </v-col>
         </v-row>
       </v-col>
@@ -61,9 +51,13 @@
 <script lang="ts">
 import Vue from "vue";
 import { ActionTypes } from "../enums/action-types";
+import Card from "./Card.vue";
 
 export default Vue.extend({
   name: "Layout",
+  components: {
+    Card,
+  },
   created() {
     this.$store.dispatch(ActionTypes.GET_ORGS);
     this.$store.dispatch(ActionTypes.GET_USERS);
