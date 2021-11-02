@@ -10,28 +10,52 @@ export default {
   async [ActionTypes.GET_ORGS]({
     commit,
   }: ActionContext<State, State>): Promise<void> {
+    commit(MutationTypes.SET_LOADING, {
+      type: "orgs",
+      value: true,
+    });
     try {
       commit(MutationTypes.SET_ORGS, await gs.fetchOrgs());
     } catch (error) {
       console.log(error);
     }
+    commit(MutationTypes.SET_LOADING, {
+      type: "orgs",
+      value: false,
+    });
   },
   async [ActionTypes.GET_USERS]({
     commit,
   }: ActionContext<State, State>): Promise<void> {
+    commit(MutationTypes.SET_LOADING, {
+      type: "users",
+      value: true,
+    });
     try {
       commit(MutationTypes.SET_USERS, await gs.fetchUsers());
     } catch (error) {
       console.log(error);
     }
+    commit(MutationTypes.SET_LOADING, {
+      type: "users",
+      value: false,
+    });
   },
   async [ActionTypes.GET_REPOS]({
     commit,
   }: ActionContext<State, State>): Promise<void> {
+    commit(MutationTypes.SET_LOADING, {
+      type: "repos",
+      value: true,
+    });
     try {
       commit(MutationTypes.SET_REPOS, await gs.fetchRepos());
     } catch (error) {
       console.log(error);
     }
+    commit(MutationTypes.SET_LOADING, {
+      type: "repos",
+      value: false,
+    });
   },
 };

@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" sm="4">
-        <Card>
+        <Card :loading="$store.state.loading.orgs">
           <v-card-title>Organizations</v-card-title>
         </Card>
         <Card v-for="org in $store.getters.getOrgs" v-bind:key="org.id">
@@ -15,7 +15,7 @@
         </Card>
       </v-col>
       <v-col cols="12" sm="4">
-        <Card>
+        <Card :loading="$store.state.loading.users">
           <v-card-title>Users</v-card-title>
         </Card>
         <Card v-for="user in $store.getters.getUsers" v-bind:key="user.id">
@@ -27,7 +27,7 @@
         </Card>
       </v-col>
       <v-col cols="12" sm="4">
-        <Card>
+        <Card :loading="$store.state.loading.repos">
           <v-card-title>Repositories</v-card-title>
         </Card>
         <Card

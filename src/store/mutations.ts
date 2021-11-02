@@ -2,7 +2,7 @@ import { MutationTypes } from "@/enums/mutation-types";
 import { OrgDetails } from "@/interfaces/org";
 import { RepoDetails } from "@/interfaces/repo";
 import { Resp } from "@/interfaces/resp";
-import { State } from "@/interfaces/state";
+import { LoadingType, State } from "@/interfaces/state";
 import { UserDetails } from "@/interfaces/user";
 
 function arrayToMap<T extends Resp>(array: ReadonlyArray<T>): Map<number, T> {
@@ -27,5 +27,11 @@ export default {
     repos: ReadonlyArray<RepoDetails>
   ): void => {
     state.repos = arrayToMap(repos);
+  },
+  [MutationTypes.SET_LOADING]: (
+    state: State,
+    loading: { type: LoadingType; value: boolean }
+  ): void => {
+    state.loading[loading.type] = loading.value;
   },
 };
