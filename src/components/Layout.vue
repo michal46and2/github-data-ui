@@ -5,7 +5,7 @@
         <Card>
           <v-card-title>Organizations</v-card-title>
         </Card>
-        <Card v-for="org in $store.state.orgs" v-bind:key="org.id">
+        <Card v-for="org in $store.getters.getOrgs" v-bind:key="org.id">
           <v-card-text>
             <div class="text--primary">{{ org.name || org.login }}</div>
             <div>Followers: {{ org.followers }}</div>
@@ -18,7 +18,7 @@
         <Card>
           <v-card-title>Users</v-card-title>
         </Card>
-        <Card v-for="user in $store.state.users" v-bind:key="user.id">
+        <Card v-for="user in $store.getters.getUsers" v-bind:key="user.id">
           <v-img :src="user.avatar_url"></v-img>
           <v-card-text>
             <div class="text--primary">{{ user | nameWithLogin }}</div>
@@ -30,7 +30,7 @@
         <Card>
           <v-card-title>Repositories</v-card-title>
         </Card>
-        <Card v-for="repo in $store.state.repos" v-bind:key="repo.id">
+        <Card v-for="repo in $store.getters.getRepos" v-bind:key="repo.id">
           <v-card-text>
             <div class="text--primary">{{ repo.name }}</div>
             <div>Open PRs: {{ repo.prs_count }}</div>

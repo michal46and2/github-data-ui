@@ -1,5 +1,5 @@
 export default {
-  orgs: [],
-  repos: [],
-  users: [],
+  orgs: new Map(),
+  repos: new Map(),
+  users: new Map(),
 };

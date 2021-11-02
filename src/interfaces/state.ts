@@ -3,7 +3,7 @@ import { RepoDetails } from "./repo";
 import { UserDetails } from "./user";
 
 export interface State {
-  orgs: ReadonlyArray<OrgDetails>;
-  repos: ReadonlyArray<RepoDetails>;
-  users: ReadonlyArray<UserDetails>;
+  orgs: Map<number, OrgDetails>;
+  repos: Map<number, RepoDetails>;
+  users: Map<number, UserDetails>;
 }
