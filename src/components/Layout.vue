@@ -1,48 +1,44 @@
 <template>
   <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-row>
-          <v-col cols="4">
-            <Card>
-              <v-card-title>Organizations</v-card-title>
-            </Card>
-            <Card v-for="org in $store.state.orgs" v-bind:key="org.id">
-              <v-card-text>
-                <div class="text--primary">{{ org.name || org.login }}</div>
-                <div>Followers: {{ org.followers }}</div>
-                <div>Repos: {{ org.public_repos }}</div>
-                <div>Created: {{ org.created_at | formatDate }}</div>
-              </v-card-text>
-            </Card>
-          </v-col>
-          <v-col cols="4">
-            <Card>
-              <v-card-title>Users</v-card-title>
-            </Card>
-            <Card v-for="user in $store.state.users" v-bind:key="user.id">
-              <v-img :src="user.avatar_url"></v-img>
-              <v-card-text>
-                <div class="text--primary">{{ user | nameWithLogin }}</div>
-                <div>{{ user.created_at | registeredDaysAgo }}</div>
-              </v-card-text>
-            </Card>
-          </v-col>
-          <v-col cols="4">
-            <Card>
-              <v-card-title> Repositories </v-card-title>
-            </Card>
-            <Card v-for="repo in $store.state.repos" v-bind:key="repo.id">
-              <v-card-text>
-                <div class="text--primary">{{ repo.name }}</div>
-                <div>Open PRs: {{ repo.prs_count }}</div>
-                <div>Stars: {{ repo.stargazers_count }}</div>
-                <div>Open issues: {{ repo.open_issues_count }}</div>
-                <div>{{ repo | prsToIssuesRatio }}</div>
-              </v-card-text>
-            </Card>
-          </v-col>
-        </v-row>
+    <v-row>
+      <v-col cols="12" sm="4">
+        <Card>
+          <v-card-title>Organizations</v-card-title>
+        </Card>
+        <Card v-for="org in $store.state.orgs" v-bind:key="org.id">
+          <v-card-text>
+            <div class="text--primary">{{ org.name || org.login }}</div>
+            <div>Followers: {{ org.followers }}</div>
+            <div>Repos: {{ org.public_repos }}</div>
+            <div>Created: {{ org.created_at | formatDate }}</div>
+          </v-card-text>
+        </Card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <Card>
+          <v-card-title>Users</v-card-title>
+        </Card>
+        <Card v-for="user in $store.state.users" v-bind:key="user.id">
+          <v-img :src="user.avatar_url"></v-img>
+          <v-card-text>
+            <div class="text--primary">{{ user | nameWithLogin }}</div>
+            <div>{{ user.created_at | registeredDaysAgo }}</div>
+          </v-card-text>
+        </Card>
+      </v-col>
+      <v-col cols="12" sm="4">
+        <Card>
+          <v-card-title>Repositories</v-card-title>
+        </Card>
+        <Card v-for="repo in $store.state.repos" v-bind:key="repo.id">
+          <v-card-text>
+            <div class="text--primary">{{ repo.name }}</div>
+            <div>Open PRs: {{ repo.prs_count }}</div>
+            <div>Stars: {{ repo.stargazers_count }}</div>
+            <div>Open issues: {{ repo.open_issues_count }}</div>
+            <div>{{ repo | prsToIssuesRatio }}</div>
+          </v-card-text>
+        </Card>
       </v-col>
     </v-row>
   </v-container>
