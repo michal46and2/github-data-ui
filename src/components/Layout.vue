@@ -50,6 +50,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { ActionTypes } from "../enums/action-types";
+import { MutationTypes } from "../enums/mutation-types";
 import Card from "./Card.vue";
 
 export default Vue.extend({
@@ -58,9 +59,18 @@ export default Vue.extend({
     Card,
   },
   created() {
-    this.$store.dispatch(ActionTypes.GET_ORGS);
-    this.$store.dispatch(ActionTypes.GET_USERS);
-    this.$store.dispatch(ActionTypes.GET_REPOS);
+    this.$store.dispatch(ActionTypes.GET_DATA, {
+      loading: MutationTypes.SET_ORGS_LOADING,
+      set: MutationTypes.SET_ORGS,
+    });
+    this.$store.dispatch(ActionTypes.GET_DATA, {
+      loading: MutationTypes.SET_USERS_LOADING,
+      set: MutationTypes.SET_USERS,
+    });
+    this.$store.dispatch(ActionTypes.GET_DATA, {
+      loading: MutationTypes.SET_REPOS_LOADING,
+      set: MutationTypes.SET_REPOS,
+    });
   },
 });
 </script>
