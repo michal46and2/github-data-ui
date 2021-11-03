@@ -1,61 +1,33 @@
 import { ActionTypes } from "@/enums/action-types";
 import { MutationTypes } from "@/enums/mutation-types";
+import { Org, OrgDetails } from "@/interfaces/org";
 import { State } from "@/interfaces/state";
+import { User, UserDetails } from "@/interfaces/user";
 import { ActionContext } from "vuex";
 
 import GithubService from "../services/github.service";
 const gs = new GithubService();
 
 export default {
-  async [ActionTypes.GET_ORGS]({
-    commit,
-  }: ActionContext<State, State>): Promise<void> {
-    commit(MutationTypes.SET_LOADING, {
-      type: "orgs",
-      value: true,
-    });
-    try {
-      commit(MutationTypes.SET_ORGS, await gs.fetchOrgs());
-    } catch (error) {
-      console.log(error);
-    }
-    commit(MutationTypes.SET_LOADING, {
-      type: "orgs",
-      value: false,
+  [ActionTypes.GET_ORGS]({ commit }: ActionContext<State, State>): void {
+    commit(MutationTypes.SET_ORGS_LOADING, true);
+    gs.fetch$<Org, OrgDetails>(gs.orgsEndpoint).subscribe((orgs) => {
+      commit(MutationTypes.SET_ORGS, orgs);
+      commit(MutationTypes.SET_ORGS_LOADING, false);
     });
   },
-  async [ActionTypes.GET_USERS]({
-    commit,
-  }: ActionContext<State, State>): Promise<void> {
-    commit(MutationTypes.SET_LOADING, {
-      type: "users",
-      value: true,
-    });
-    try {
-      commit(MutationTypes.SET_USERS, await gs.fetchUsers());
-    } catch (error) {
-      console.log(error);
-    }
-    commit(MutationTypes.SET_LOADING, {
-      type: "users",
-      value: false,
+  [ActionTypes.GET_USERS]({ commit }: ActionContext<State, State>): void {
+    commit(MutationTypes.SET_USERS_LOADING, true);
+    gs.fetch$<User, UserDetails>(gs.usersEndpoint).subscribe((users) => {
+      commit(MutationTypes.SET_USERS, users);
+      commit(MutationTypes.SET_USERS_LOADING, false);
     });
   },
-  async [ActionTypes.GET_REPOS]({
-    commit,
-  }: ActionContext<State, State>): Promise<void> {
-    commit(MutationTypes.SET_LOADING, {
-      type: "repos",
-      value: true,
-    });
-    try {
-      commit(MutationTypes.SET_REPOS, await gs.fetchRepos());
-    } catch (error) {
-      console.log(error);
-    }
-    commit(MutationTypes.SET_LOADING, {
-      type: "repos",
-      value: false,
+  [ActionTypes.GET_REPOS]({ commit }: ActionContext<State, State>): void {
+    commit(MutationTypes.SET_REPOS_LOADING, true);
+    gs.fetchRepos$.subscribe((repos) => {
+      commit(MutationTypes.SET_REPOS, repos);
+      commit(MutationTypes.SET_REPOS_LOADING, false);
     });
   },
 };

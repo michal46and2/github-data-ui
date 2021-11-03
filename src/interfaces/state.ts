@@ -2,7 +2,7 @@ import { OrgDetails } from "./org";
 import { RepoDetails } from "./repo";
 import { UserDetails } from "./user";
 
-export type LoadingType = "orgs" | "users" | "repos";
+type LoadingType = "orgs" | "users" | "repos";
 
 export interface State {
   orgs: Map<number, OrgDetails>;
