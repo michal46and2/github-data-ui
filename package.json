@@ -6,11 +6,13 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "vue": "vue"
+    "vue": "vue",
+    "firebase": "firebase"
   },
   "dependencies": {
     "@vue/cli": "^4.5.15",
     "core-js": "^3.6.5",
+    "firebase-tools": "^9.21.0",
     "moment": "^2.29.1",
     "register-service-worker": "^1.7.1",
     "rxjs": "6.6.7",

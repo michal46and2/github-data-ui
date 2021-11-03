@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "pijeto-pl"
+  },
+  "targets": {
+    "pijeto-pl": {
+      "hosting": {
+        "github-data-ui": [
+          "github-data-ui"
+        ]
+      }
+    }
+  }
+}
